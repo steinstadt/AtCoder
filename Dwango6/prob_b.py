@@ -1,9 +1,4 @@
 # Fusing Slimes
-<<<<<<< HEAD
-# 場合分けできていないからACできない
-=======
-# 場合分けできていないからACできなかった
->>>>>>> 469e12efd619ded6749ff51efcb4ff136e3738a8
 import random
 
 e = 10**9 + 7 # 大きい数の対策
