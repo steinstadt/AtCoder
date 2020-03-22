@@ -1,0 +1,3 @@
+# Problem D - Pairs
+
+# input
