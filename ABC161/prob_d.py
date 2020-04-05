@@ -7,25 +7,35 @@ K = int(input())
 ans = [-1]*18
 
 def num_add(num_list, i):
+
     if not num_list[i+1]==-1 and abs(num_list[i]+1-num_list[i+1])<=1:
-        num_list[i] += 1
+        if num_list[i]==9:
+            num_list = num_add(num_list, i+1)
+            tmp = num_list[i+1] - 1
+            if tmp<0:
+                tmp = 0
+            num_list[i] = tmp
+        else:
+            num_list[i] += 1
     elif num_list[i+1]==-1 and num_list[i]<9:
         num_list[i] += 1
-        return num_list
-    elif num_list[i]==9:
+    elif num_list[i]+1>9:
         if num_list[i+1]==-1:
             num_list[i+1] = 1
             num_list[i] = 0
         else:
-            num_add(num_list, i+1)
-            num_list[i] = 0
-        return num_list
+            num_list = num_add(num_list, i+1)
+            tmp = num_list[i+1] - 1
+            if tmp<=0:
+                tmp = 0
+            num_list[i] = tmp
     else:
-        num_add(num_list, i+1)
+        num_list = num_add(num_list, i+1)
         tmp = num_list[i+1] - 1
         if tmp<=0:
             tmp = 0
         num_list[i] = tmp
+    print(num_list)
     return num_list
 
 for i in range(K+1):
