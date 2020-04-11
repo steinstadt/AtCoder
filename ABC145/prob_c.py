@@ -5,25 +5,25 @@ import math
 
 # input
 N = int(input())
-distance_list = []
+point_list = []
 for i in range(N):
     x, y = map(int, input().split())
-    distance_list.append([x, y])
+    point_list.append([x, y])
 
 # initialization
+pattern_list = []
+moto = [i for i in range(1, N+1)]
 distance = 0
-pattern_num = 0
-pattern_moto = [i for i in range(1, N+1)]
-for p in permutations(pattern_moto):
-    pattern_num += 1
-    tmp_distance = 0
-    for d in range(len(p)-1):
-        d_1 = distance_list[p[d]-1]
-        d_2 = distance_list[p[d+1]-1]
-        tmp = math.sqrt((d_1[0]-d_2[0])**2 + (d_1[1]-d_2[1])**2)
-        tmp_distance += tmp
-    distance += tmp_distance
+patterns = list(permutations(moto))
+
+# count
+for p in patterns:
+    for i in range(len(p)-1):
+        point_1 = point_list[p[i]-1]
+        point_2 = point_list[p[i+1]-1]
+        tmp = math.sqrt((point_1[0]-point_2[0])**2 + (point_1[1]-point_2[1])**2)
+        distance += tmp
+distance = distance / len(patterns)
 
 # output
-distance = distance / pattern_num
 print(distance)
