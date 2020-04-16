@@ -1,25 +1,4 @@
-# 競技プログラミングで使える関数集合
-
-# 最大公約数を列挙する関数
-def make_divisors(n):
-    divisors = []
-    for i in range(1, int(n**0.5)+1):
-        if n % i == 0:
-            divisors.append(i)
-            if i != n // i:
-                divisors.append(n//i)
-    divisors.sort()
-    return divisors
-
-# bit全探索を行ってくれる関数
-def bit_search():
-    opt_list = []
-    for i in range(8):
-        opt = [0, 0, 0]
-        for j in range(3):
-            if ((i>>j)&1):
-                opt[3-j-1] = 1
-        opt_list.append(opt)
+# Problem D - Friend Suggestions
 
 class UnionFind():
     def __init__(self, n):
@@ -67,3 +46,34 @@ class UnionFind():
 
     def __str__(self):
         return '\n'.join('{}: {}'.format(r, self.members(r)) for r in self.roots())
+
+# input
+N, M, K = map(int, input().split())
+
+# initialization
+friend_uf = UnionFind(N)
+not_list = [[] for i in range(N+1)]
+ans_list = [0] * (N)
+
+# friend relation union
+for i in range(M):
+    a, b = map(int, input().split())
+    friend_uf.union(a-1, b-1)
+    not_list[a].append(b)
+    not_list[b].append(a)
+
+# block relation union
+for i in range(K):
+    c, d = map(int, input().split())
+    if friend_uf.same(c-1, d-1):
+        not_list[c].append(d)
+        not_list[d].append(c)
+
+# output
+for i in range(1, N+1):
+    group_size = friend_uf.size(i-1)
+    not_size = not_list[i]
+    ans = group_size - len(set(not_size)) - 1
+    ans_list[i-1] = ans
+ans_list = list(map(str, ans_list))
+print(" ".join(ans_list))
