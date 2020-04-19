@@ -4,22 +4,26 @@
 N, X, Y = map(int, input().split())
 
 # initialization
-INF = N
-kyori_graph = [[INF]*N for i in range(N)]
-kosu_list = [0]*(N-1)
+graph = [[float('INF')]*(N+1) for i in range(N+1)]
+for i in range(1, N):
+    graph[i][i+1] = 1
+graph[X][Y] = 1
+kyori = [0]*N
 
-# graph search
-for i in range(N):
-    for j in range(i+1, N):
-        # グラフの更新
-        kyori_graph[i][j] = min(abs(j-i), abs(X-1-i)+1+abs(j-(Y-1)))
+# dp
+for i in range(1, N):
+    for j in range(i+1, N+1):
+        if j<=X:
+            graph[i][j] = min(graph[i][j], abs(j - i))
+        else:
+            graph[i][j] = min(graph[i][j], abs(j - i), abs(X - i)+1+abs(j - Y))
 
-# 個数の数え上げ
-for i in range(N):
-    for j in range(i+1, N):
-        kyori = kyori_graph[i][j]
-        kosu_list[kyori-1] += 1
+# kyori count
+for i in range(1, N+1):
+    for j in range(i+1, N+1):
+        if not graph[i][j]==float('INF'):
+            kyori[graph[i][j]] += 1
 
 # output
-for k in kosu_list:
-    print(k)
+for i in range(1, N):
+    print(kyori[i])
