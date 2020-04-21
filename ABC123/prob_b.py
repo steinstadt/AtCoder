@@ -1,30 +1,27 @@
 # Problem B - Five Dishes
 
-import itertools
+from itertools import permutations
 import math
 
-# input process
-cost_list = []
+# input
+nums = [0]*5
 for i in range(5):
-    cost_list.append(int(input()))
+    n = int(input())
+    nums[i] = n
 
 # initialization
-min_ans = 1000
+pattern_moto = [i for i in range(5)]
+patterns = permutations(pattern_moto)
+min_time = 1000
 
-# count process
-perm_list = list(itertools.permutations(cost_list))
-for p in perm_list:
-    p = list(p)
-    # cost calc
+# time count
+for p in patterns:
     tmp = 0
-    for i in range(len(p)):
-        if i==4:
-            tmp += p[i]
-            break
-        tmp += p[i]
-        tmp = math.ceil((tmp/10))*10
+    for i in range(4):
+        tmp += nums[p[i]]
+        tmp = math.ceil(tmp/10)*10
+    tmp += nums[p[4]]
+    min_time = min(min_time, tmp)
 
-    min_ans = min(min_ans, tmp)
-
-# output process
-print(min_ans)
+# output
+print(min_time)

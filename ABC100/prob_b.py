@@ -1,9 +1,20 @@
-d, n = map(int, input().split())
+# Problem B - Ringo's Favorite Numbers
 
+# input
+D, N = map(int, input().split())
 
-for i in range(1, 100000000):
-    if i % (100 ** d) == 0 and i % (100 * 100 ** d) != 0:
-        n -= 1
-    if n == 0:
-        print(i)
-        exit()
+# initialization
+ans = 0
+tmp = 100**D
+
+# count
+i = 1
+while i<=N:
+    if i==100:
+        ans = tmp * (i + 1)
+        break
+    ans = tmp * i
+    i += 1
+
+# output
+print(ans)
