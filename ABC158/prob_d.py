@@ -1,45 +1,30 @@
-# Problem D - String Formation
+# Problem E - Divisible Substring
 
-# リストで処理が遅かったら、、、
-# キューデータ構造を使おう!
+from collections import Counter
 
-from collections import deque
+# input
+N, P = map(int, input().split())
+S = list(input())
 
-# input process
-S = input().replace("\n", "")
-S = deque(list(S))
-Q = int(input()) # query number
-
-# initialization
-sento = 1
-
-# process
-for i in range(Q):
-    query_num = input()
-    # クエリが１の時
-    if query_num[0]=="1":
-        # 反転処理
-        if sento==1:
-            sento = 10
-        elif sento==10:
-            sento = 1
-    elif query_num[0]=="2":
-        n, f, c = query_num.split()
-        f = int(f)
-        if f==1: # 先頭追加処理
-            # 先頭の位置によって変わる
-            if sento==1:
-                S.appendleft(c)
-            elif sento==10:
-                S.append(c)
-        elif f==2: # 末尾追加処理
-            if sento==1:
-                S.append(c)
-            elif sento==10:
-                S.appendleft(c)
-
-# output process
-if sento==1:
-    print("".join(S))
+# count
+if P==2 or P==5:
+    ans = 0
+    for i in range(N-1, -1, -1):
+        s = int(S[i])
+        if s%P==0:
+            ans += i + 1
+    # output
+    print(ans)
 else:
-    print("".join(list(S)[::-1]))
+    p_nums = [0]*(N+1)
+    s = 0
+    for i in range(N-1, -1, -1):
+        s = int(S[i]) * pow(10, N - i - 1, P) + s
+        p_nums[N - i] = s%P
+    p_counter = [0]*P
+    for i in range(N+1):
+        p_counter[p_nums[i]] += 1
+    ans = 0
+    for i in range(P):
+        ans += p_counter[i] * (p_counter[i] - 1) // 2
+    print(ans)

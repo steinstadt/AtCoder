@@ -1,5 +1,9 @@
 # 競技プログラミングで使える関数集合
 
+# 組み合わせ
+def combinations_count(n, r):
+    return math.factorial(n) // (math.factorial(n - r) * math.factorial(r))
+
 # 最大公約数を列挙する関数
 def make_divisors(n):
     divisors = []
