@@ -1,39 +1,47 @@
-# Problem C - Grid Repainting
+# Problem C - Grid Repainting 2
 
-# input process
+# input
 H, W = map(int, input().split())
-s_list = [[0]*W for i in range(H)]
+board = [[0]*W for i in range(H)]
 for i in range(H):
-    tmp = input()
+    s_list = list(input())
     for j in range(W):
-        s_list[i][j] = tmp[j]
+        board[i][j] = s_list[j]
 
-# search process
+# initialization
 is_ok = True
+
+# check
 for i in range(H):
     for j in range(W):
-        if s_list[i][j]==".":
+        s = board[i][j]
+        if s=='.':
             continue
-        # right process
+
+        # right
         if j+1<W:
-            if s_list[i][j+1]=="#":
+            if s=='#' and board[i][j+1]=='#':
                 continue
-        # left process
+
+        # left
         if j-1>=0:
-            if s_list[i][j-1]=="#":
+            if s=='#' and board[i][j-1]=='#':
                 continue
-        # down process
-        if i+1<H:
-            if s_list[i+1][j]=="#":
-                continue
-        # up process
+
+        # up
         if i-1>=0:
-            if s_list[i-1][j]=="#":
+            if s=='#' and board[i-1][j]=='#':
                 continue
-        # stop process
+
+        # down
+        if i+1<H:
+            if s=='#' and board[i+1][j]=='#':
+                continue
+
         is_ok = False
         break
 
+# output
 if is_ok:
     print("Yes")
 else:

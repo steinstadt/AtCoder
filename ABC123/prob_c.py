@@ -1,16 +1,24 @@
+# Problem C - Five Transportations
+
 import math
 
+# input
 N = int(input())
-A = int(input())
-B = int(input())
-C = int(input())
-D = int(input())
-E = int(input())
+trans = [0]*5
+for i in range(5):
+    trans[i] = int(input())
 
-t_list = [A, B, C, D, E]
-min_t = min(t_list)
-min_i = 0
+# initialization
+min_pos = 0
+for i in range(5):
+    if trans[min_pos]>trans[i]:
+        min_pos = i
 
-t_1 = math.ceil(N/min_t)
-t_1 = int((N+min_t-1) / min_t)
-print(t_1+4)
+# calc
+time_1 = min_pos
+time_2 = math.ceil(N/trans[min_pos])
+time_3 = 6 - (min_pos + 2)
+ans = time_1 + time_2 + time_3
+
+# output
+print(ans)
