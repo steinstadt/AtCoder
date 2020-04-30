@@ -1,21 +1,22 @@
-# KEYENCE String 全通りのパターンを探索する
+# Problem B - KEYENCE String
 
-# input process
-S = input()
-s_length = len(S)
+# input
+s = input()
+s_l = len(s)
 
 # initialization
-is_same = False
-for i in range(s_length):
-    for j in range(i, s_length):
-        # string slice
-        tmp_str = S[:i+1] + S[j:]
-        if tmp_str=="keyence":
-            is_same = True
+is_ok = False
+
+# check
+for i in range(s_l):
+    for j in range(i, s_l):
+        tmp_s = s[:i] + s[j:]
+        if tmp_s=='keyence':
+            is_ok = True
             break
 
-# 出力方法に気をつけて！　YesとYESの違いでWrong Answerがでた
-if is_same:
+# output
+if is_ok:
     print("YES")
 else:
     print("NO")
