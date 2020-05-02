@@ -3,12 +3,13 @@
 import math
 
 # input
-A, B, C, D = map(int, input().split())
+a, b, c, d = map(int, input().split())
 
 # initialization
-takahashi = math.ceil(C / B)
-aoki = math.ceil(A / D)
+takahashi = math.ceil(c / b)
+aoki = math.ceil(a / d)
 
+# output
 if takahashi<=aoki:
     print("Yes")
 else:

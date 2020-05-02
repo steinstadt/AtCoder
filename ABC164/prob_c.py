@@ -1,14 +1,14 @@
 # Problem C - gacha
 
 # input
-N = int(input())
+n = int(input())
 s_list = []
-for i in range(N):
-    s = input()
-    s_list.append(s)
+for i in range(n):
+    s_list.append(input())
 
 # initialization
-ans = len(set(s_list))
+s_list = list(set(s_list))
+ans = len(s_list)
 
 # output
 print(ans)

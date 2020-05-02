@@ -1,7 +1,10 @@
-# input
-S, W = map(int, input().split())
+# Problem A - Sheep and Wolves
 
-if S<=W:
+# input
+s, w = map(int, input().split())
+
+# output
+if w>=s:
     print("unsafe")
 else:
     print("safe")
