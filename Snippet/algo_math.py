@@ -92,3 +92,27 @@ class UnionFind():
 
     def __str__(self):
         return '\n'.join('{}: {}'.format(r, self.members(r)) for r in self.roots())
+
+
+# 逆元を求めるスクリプト
+n = 10 ** 9
+k = 2 * 10 ** 5
+mod = 10**9 + 7
+
+def modinv(x):
+    return pow(x, mod-2, mod)
+
+modinv_table = [-1] * (k+1)
+for i in range(1, k+1):
+    modinv_table[i] = modinv(i)
+
+def binomial_coefficients(n, k):
+    ans = 1
+    for i in range(k):
+        ans *= n-i
+        ans *= modinv_table[i + 1]
+        ans %= mod
+    return ans
+
+print(binomial_coefficients(n, k))
+# 逆元を求めるスクリプト
