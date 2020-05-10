@@ -2,29 +2,29 @@
 
 # input
 N, M, Q = map(int, input().split())
-q_list = []
+query = []
 for i in range(Q):
     a, b, c, d = map(int, input().split())
-    q_list.append([a, b, c, d])
-
-# initialization
-max_ans = 0
+    query.append([a, b, c, d])
 
 # dfs search
-def dfs_score(a_list, p, n, max_ans):
-    if p==N:
+def dfs(nums, score, ini_num, keta):
+    if keta==N+1:
         tmp_score = 0
-        for q in q_list:
-            if a_list[q[1]-1]-a_list[q[0]-1]==q[2]:
+        for q in query:
+            if nums[q[1]]-nums[q[0]]==q[2]:
                 tmp_score += q[3]
-        max_ans = max(max_ans, tmp_score)
+        score = max(score, tmp_score)
     else:
-        for i in range(n, M+1):
-            a_list[p] = i
-            max_ans = dfs_score(a_list, p+1, i, max_ans)
-    return max_ans
+        for i in range(ini_num, M+1):
+            nums[keta] = ini_num
+            score = max(score, dfs(nums, score, i, keta+1))
+    return score
 
+# initialization
+nums = [0]*(N+1)
+max_score = 0
+
+max_score = dfs(nums, 0, 1, 1)
 # output
-a_list = [0]*N
-max_ans = dfs_score(a_list, 0, 1, max_ans)
-print(max_ans)
+print(max_score)

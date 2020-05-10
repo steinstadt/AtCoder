@@ -1,6 +1,10 @@
-s = input()
+# Problem A - A?C
 
-if s=='ABC':
+# input
+S = input()
+
+# check
+if S=="ABC":
     print("ARC")
 else:
     print("ABC")

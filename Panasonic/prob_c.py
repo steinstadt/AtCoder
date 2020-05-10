@@ -1,16 +1,13 @@
+# Problem C - Sqrt Inequality
 
-import math
-
+# input
 a, b, c = map(int, input().split())
 
-teko = 10**30
+# check
+is_ok = (a * b)*4 < (c - a - b)**2 and (c-a-b)>0
 
-r_a = math.sqrt(a * teko)
-r_b = math.sqrt(b * teko)
-r_c = math.sqrt(c * teko)
-
-
-if r_a + r_b < r_c:
+# output
+if is_ok:
     print("Yes")
 else:
     print("No")
