@@ -8,10 +8,8 @@ for i in range(N):
     book_list.append(book)
 
 # initialization
-price = float('INF')
+min_cost = float("INF")
 is_ok = False
-
-# pattern
 pattern = []
 for i in range(2**N):
     p = [0]*N
@@ -20,25 +18,28 @@ for i in range(2**N):
             p[j] = 1
     pattern.append(p)
 
+# check
 for p in pattern:
-    tmp_sum = [0]*(M+1)
-    is_finish = True
+    tmp_cost = 0
+    tmp_list = [0] * M
+    tmp_ok = True
     for i in range(N):
-        if p[i]==1:
-            for j in range(M+1):
-                tmp_sum[j] += book_list[i][j]
-    # check
-    for i in range(1, M+1):
-        if not tmp_sum[i]>=X:
-            is_finish = False
-            break
+        if p[i]==0:
+            continue
 
-    if is_finish:
+        tmp_cost += book_list[i][0]
+        for j in range(1, M+1):
+            tmp_list[j-1] += book_list[i][j]
+    for t in tmp_list:
+        if t<X:
+            tmp_ok = False
+            break
+    if tmp_ok:
         is_ok = True
-        price = min(price, tmp_sum[0])
+        min_cost = min(min_cost, tmp_cost)
 
 # output
 if is_ok:
-    print(price)
+    print(min_cost)
 else:
     print(-1)

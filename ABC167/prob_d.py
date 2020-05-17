@@ -2,31 +2,32 @@
 
 # input
 N, K = map(int, input().split())
-a_nums = list(map(int, input().split()))
+a_list = list(map(int, input().split()))
 
 # initialization
-visit_list = [0]*N
-visit_list[0] = 1
-pos = a_nums[0]
+visit_list = [0] * N
+pos = a_list[0]
+visit_list[pos-1] = 1
 visit_count = 1
+remain = K - 1
+is_ok = True
+ans = 0
 
-while visit_list[pos-1]==0 and visit_count<K:
+# count
+while remain>0 and is_ok:
+    pos = a_list[pos-1]
+    remain -= 1
     visit_count += 1
-    visit_list[pos-1] = visit_count
-    pos = a_nums[pos-1]
-visit_count += 1
-
-# calc 1
-if visit_count<K:
-    tmp_1 = 0
-    if pos==1:
-        tmp_1 = visit_count - visit_list[pos-1] # 周期
-    else:
+    if pos==1 or not visit_list[pos-1]==0:
         tmp_1 = visit_count - visit_list[pos-1]
-    tmp_2 = (K-visit_count) % tmp_1 # 何周するのか
-    # tmp_2回分ループ処理を行う
-    for i in range(tmp_2+1):
-        pos = a_nums[pos-1]
+        tmp_2 = remain % tmp_1
+        for t in range(tmp_2):
+            pos = a_list[pos-1]
+        is_ok = False
+        break
+    else:
+        if not pos==1 and visit_list[pos-1]==0:
+            visit_list[pos-1] = visit_count
 
 # output
 print(pos)
