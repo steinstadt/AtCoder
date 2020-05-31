@@ -1,13 +1,15 @@
 # Problem A - Therefore
-
 # input
-N = input()
-ans = N[-1]
+n = int(list(input())[-1])
+
+# initialization
+yomi = list('pphbhhphph')
 
 # output
-if ans in ['2', '4', '5', '7', '9']:
-    print("hon")
-elif ans in ['0', '1', '6', '8']:
-    print("pon")
+ans = yomi[n]
+if ans=='p':
+    print('pon')
+elif ans=='b':
+    print('bon')
 else:
-    print("bon")
+    print('hon')

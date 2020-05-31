@@ -1,12 +1,12 @@
 # Problem Triple Dots
+
 # input
 K = int(input())
-S = list(input())
-s_len = len(S)
+S = input()
 
-if s_len<=K:
-    print("".join(S))
+# output
+if len(S)<=K:
+    print(S)
 else:
-    tmp = S[:K]
-    ans = "".join(tmp) + "..."
+    ans = S[:K] + '...'
     print(ans)
