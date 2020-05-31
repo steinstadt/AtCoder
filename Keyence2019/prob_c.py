@@ -4,16 +4,14 @@
 N, K, S = map(int, input().split())
 
 # initialization
-ans_list = [0]*(N)
+num_list = [S]*N
 
 # check
-for i in range(K):
-    ans_list[i] = S
 for i in range(K, N):
     if S==10**9:
-        ans_list[i] = S - 1
+        num_list[i] = S - 1
     else:
-        ans_list[i] = S + 1
+        num_list[i] = S + 1
 
 # output
-print(" ".join(list(map(str, ans_list))))
+print(" ".join(list(map(str, num_list))))

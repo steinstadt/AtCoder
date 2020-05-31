@@ -1,38 +1,36 @@
 # Problem D - Boring Sequence
 
-from collections import Counter
-
 # input
 N, K = map(int, input().split())
-a_list = list(map(int, input().split()))
-a_len = len(a_list)
+a_nums = list(map(int, input().split()))
 
 # initialization
-ct = Counter(a_list)
 left = 0
-right = ct.most_common()[0][1]
+right = 2 * 10**5 + 1
 
 # binary search
-while not abs(right-left)<=1:
+while right-left>1:
     mid = (right + left) // 2
 
-    num_count = 1
-    update_count = 0
+    is_ok = True
+    swap_count = 0
+    check_count = 0
     i = 1
     while i<N:
-        if a_list[i-1]==a_list[i]:
-            num_count += 1
-            if num_count>mid:
-                update_count += 1
-                num_count = 1
-                i += 1
-        else: # 等しくなかったときの処理
-            num_count = 1
+        if a_nums[i-1]==a_nums[i]:
+            check_count += 1
+            if check_count==mid:
+                swap_count += 1
+                i += 2
+                check_count = 0
+                continue
+        else:
+            check_count = 0
 
         i += 1
 
-
-    if update_count<=K:
+    # update
+    if swap_count<=K:
         right = mid
     else:
         left = mid

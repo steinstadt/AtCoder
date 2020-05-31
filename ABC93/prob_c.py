@@ -4,27 +4,24 @@
 A, B, C = map(int, input().split())
 
 # initialization
-num_count = 0
-not_finished = True
-ans_list = [A, B, C]
+num_list = sorted([A, B, C])
+sa = num_list[2] - num_list[1]
+count = sa
 
-# count
-while not_finished:
-    if ans_list[0]==ans_list[1] and ans_list[1]==ans_list[2]:
-        not_finished=False
-        break
-    ans_list = sorted(ans_list)
-    if len(set(ans_list))==3:
-        ans_list[0] += 1
-        ans_list[1] += 1
-        num_count += 1
-    elif ans_list[1]==ans_list[2]:
-        ans_list[0] += 2
-        num_count += 1
-    elif ans_list[0]==ans_list[1]:
-        ans_list[0] += 1
-        ans_list[1] += 1
-        num_count += 1
+# count 1
+for i in range(3):
+    if num_list[i]<num_list[2]:
+        num_list[i] += sa
+
+# count 2
+num_list = sorted(num_list)
+if num_list[0]<num_list[1] and num_list[0]<num_list[2]:
+    if (num_list[1]-num_list[0])%2==0:
+        count += (num_list[1]-num_list[0])// 2
+    else:
+        count += (num_list[1]-num_list[0])// 2 + 2
+elif num_list[2]>num_list[0] and num_list[2]>num_list[1]:
+    count += 1
 
 # output
-print(num_count)
+print(count)

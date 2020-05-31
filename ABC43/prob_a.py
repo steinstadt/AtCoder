@@ -1,9 +1,9 @@
 # Problem A - キャンディーとN人の子供イージー
+# input
+n = int(input())
 
-# input process
-N = int(input())
+# initialization
+ans = (n * (n + 1)) // 2
 
-ans = N * (1 + N)
-ans = ans // 2
-
+# output
 print(ans)
