@@ -1,60 +1,50 @@
 # Problem B - Union Find
-class UnionFind():
+
+class UnionFind:
+    # n要素で初期化
     def __init__(self, n):
-        self.n = n
-        self.parents = [-1] * n
+        self.par = [0]*n
+        for i in range(n):
+            self.par[i] = i
 
-    def find(self, x):
-        if self.parents[x] < 0:
+    # 木の根を求める
+    def root(self, x):
+        if self.par[x]==x: # 根
             return x
-        else:
-            self.parents[x] = self.find(self.parents[x])
-            return self.parents[x]
+        else: # 経路圧縮
+            self.par[x] = self.root(self.par[x])
+            return self.par[x]
 
-    def union(self, x, y):
-        x = self.find(x)
-        y = self.find(y)
+    # xとyが同じ集合に属するか否かを判定
+    def same(self, x, y):
+        return self.root(x)==self.root(y)
 
-        if x == y:
+    # xとyの属する集合を併合
+    def unite(self, x, y):
+        x = self.root(x)
+        y = self.root(y)
+        if x==y:
             return
 
-        if self.parents[x] > self.parents[y]:
-            x, y = y, x
+        if x<y:
+            self.par[y] = x
+        else:
+            self.par[x] = y
 
-        self.parents[x] += self.parents[y]
-        self.parents[y] = x
-
-    def size(self, x):
-        return -self.parents[self.find(x)]
-
-    def same(self, x, y):
-        return self.find(x) == self.find(y)
-
-    def members(self, x):
-        root = self.find(x)
-        return [i for i in range(self.n) if self.find(i) == root]
-
-    def roots(self):
-        return [i for i, x in enumerate(self.parents) if x < 0]
-
-    def group_count(self):
-        return len(self.roots())
-
-    def all_group_members(self):
-        return {r: self.members(r) for r in self.roots()}
-
-    def __str__(self):
-        return '\n'.join('{}: {}'.format(r, self.members(r)) for r in self.roots())
-
+# input
 N, Q = map(int, input().split())
-uf = UnionFind(N) # initialization
-for q in range(Q):
+
+# initialization
+union_find_obj = UnionFind(N)
+
+# query
+for i in range(Q):
     p, a, b = map(int, input().split())
-    if p==0: # union process
-        uf.union(a-1, b-1)
-    elif p==1: # find process
-        isSame = uf.same(a-1, b-1)
-        if isSame:
+    if p==0: # 連結クエリ
+        union_find_obj.unite(a, b)
+    else:
+        result = union_find_obj.same(a, b)
+        if result:
             print("Yes")
         else:
             print("No")
