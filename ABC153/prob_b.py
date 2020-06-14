@@ -1,10 +1,14 @@
+# Problem B - Common Raccoon vs Monster
+
+# input
 H, N = map(int, input().split())
-A_list = list(map(int, input().split()))
+a_nums = list(map(int, input().split()))
 
-for i in range(0,N):
-    H = H - A_list[i]
+# initialization
+a_sum = sum(a_nums)
 
-if H<=0:
+# output
+if a_sum>=H:
     print("Yes")
 else:
     print("No")
