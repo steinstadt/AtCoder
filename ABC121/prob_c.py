@@ -1,5 +1,4 @@
 # Problem C - Energy Drink Collector
-
 # input
 N, M = map(int, input().split())
 ab_list = []
@@ -8,23 +7,23 @@ for i in range(N):
     ab_list.append([a, b])
 
 # initialization
-ab_list = sorted(ab_list, key=lambda x: x[0])
-min_cost = 0
+nokori = M
+ab_list = sorted(ab_list, key= lambda x: x[0])
+ans = 0
 
 # count
 i = 0
-nokori = M
 while nokori>0:
-    a, b = ab_list[i]
-
-    if nokori-b<0:
-        b = nokori
-        nokori = 0
-    else:
+    ab = ab_list[i]
+    a = ab[0]
+    b = ab[1]
+    if b<=nokori:
+        ans += a * b
         nokori -= b
-
-    min_cost += a * b
+    else:
+        ans += a * nokori
+        break
     i += 1
 
 # output
-print(min_cost)
+print(ans)

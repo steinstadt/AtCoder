@@ -1,7 +1,10 @@
-# Problem A - Multiplication 1
+# Problem a - Multiplication 1
 
 # input
-a, b = map(int, input().split())
+A, B = map(int, input().split())
+
+# initialization
+ans = A * B
 
 # output
-print(a * b)
+print(ans)

@@ -1,14 +1,17 @@
-# Problem C - Multiplication 3
-
-import math
+# Problem B - Multiplication 2
 
 # input
-A, B = input().split()
-A = int(A)
-B = int(float(B) * 1000)
+N = int(input())
+a_nums = list(map(int, input().split()))
 
-# initialization
-ans = (A * B)//1000
-
-# output
-print(ans)
+# count
+if 0 in a_nums:
+    print(0)
+else:
+    ans = 1
+    for a in a_nums:
+        ans *= a
+        if ans > 10**18:
+            ans = -1
+            break
+    print(ans)

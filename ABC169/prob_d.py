@@ -1,5 +1,8 @@
 # Problem D - Div Game
 
+# input
+N = int(input())
+
 # 素因数分解
 def factorization(n):
     arr = []
@@ -20,25 +23,17 @@ def factorization(n):
 
     return arr
 
-# input
-N = int(input())
-
-# initialization
-fact_arr = factorization(N)
-count = 0
-
-# count
-for f in fact_arr:
-    c = f[1]
-    tmp_count = 0
-    i = 1
-    while c-i>=0:
-        c -= i
-        tmp_count += 1
-        i += 1
-    count += tmp_count
-
-# output
+# check
 if N==1:
+    print(0)
+else:
     count = 0
-print(count)
+    fact_list = factorization(N)
+    for f in fact_list:
+        tmp = f[1]
+        i = 1
+        while tmp-i>=0:
+            count += 1
+            tmp -= i
+            i += 1
+    print(count)
