@@ -26,8 +26,7 @@ while remain>0 and is_ok:
         is_ok = False
         break
     else:
-        if not pos==1 and visit_list[pos-1]==0:
-            visit_list[pos-1] = visit_count
+        visit_list[pos-1] = visit_count
 
 # output
 print(pos)

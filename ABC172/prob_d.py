@@ -4,12 +4,12 @@
 N = int(input())
 
 # initialization
-ans = 0
+count = 0
 
 # count
 for j in range(1, N+1):
-    Y = N // j
-    ans += ((Y * (Y + 1))*j) // 2
+    M = N // j
+    count += j * ((M * (M+1)) // 2)
 
 # output
-print(ans)
+print(count)
