@@ -1,24 +1,17 @@
-# Problem B - Contests
+# Problem B - An Odd Problem
 
-# input process
+# input
 N = int(input())
-A, B = map(int, input().split())
-P_list = list(map(int, input().split()))
+a_nums = list(map(int, input().split()))
 
-# initizaliation
-combi_1 = []
-combi_2 = []
-combi_3 = []
+# initialization
+count = 0
 
-# count step
-for p in P_list:
-    if p<=A:
-        combi_1.append(p)
-    elif p>=(A+1) and p<=B:
-        combi_2.append(p)
-    else:
-        combi_3.append(p)
+# count
+for i in range(N):
+    if i%2==0:
+        if a_nums[i]%2==1:
+            count += 1
 
-# output process
-ans = min(len(combi_1), len(combi_2), len(combi_3))
-print(ans)
+# output
+print(count)

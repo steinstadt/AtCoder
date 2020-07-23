@@ -1,10 +1,15 @@
+# Problem A - Remaining Balls
+
+# input
 S, T = input().split()
 A, B = map(int, input().split())
 U = input()
 
+# check
 if U==S:
-    A = A - 1
+    A -= 1
 else:
-    B = B - 1
+    B -= 1
 
-print("%d %d"%(A,B))
+# output
+print(A, B)
