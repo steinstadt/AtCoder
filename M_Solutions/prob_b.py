@@ -1,18 +1,21 @@
-# Problem B - Sumo
+# Problem B - Magic 2
 
-# input process
-S = input()
+# input
+A, B, C = map(int, input().split())
+K = int(input())
 
-# initilization
-win_num = 0
-rest_num = 15 - len(S)
+# B check
+while B<=A:
+    B = B * 2
+    K -= 1
 
-# count process
-for s in S:
-    if s=='o':
-        win_num+=1
+# C check
+while C<=B:
+    C = C * 2
+    K -= 1
 
-if win_num+rest_num>=8:
-    print("YES")
+# output
+if K>=0:
+    print("Yes")
 else:
-    print("NO")
+    print("No")
