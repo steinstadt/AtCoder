@@ -1,25 +1,21 @@
 # Problem E - Crested Ibis vs Monster
 
 # input
-H, N = map(int, input().split())
-ab_pattern = []
-for i in range(N):
+h, n = map(int, input().split())
+magic_list = []
+for i in range(n):
     a, b = map(int, input().split())
-    ab_pattern.append([a, b])
+    magic_list.append([a, b])
 
 # initialization
-mp_list = [float('INF')] * (H+1)
-mp_list[0] = 0
+dp = [float("inf")] * (h + 1)
+dp[0] = 0
 
 # dp
-for i in range(1, H+1):
-    for ab in ab_pattern:
-        a = ab[0]
-        b = ab[1]
-        if i-a>=0:
-            mp_list[i] = min(mp_list[i], mp_list[i-a] + b)
-        else:
-            mp_list[i] = min(mp_list[i], mp_list[0] + b)
+for i in range(1, h+1):
+    for m in magic_list:
+        past_pos = max(0, i - m[0])
+        dp[i] = min(dp[i], dp[past_pos] + m[1])
 
 # output
-print(mp_list[H])
+print(dp[h])

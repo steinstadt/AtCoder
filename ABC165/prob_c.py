@@ -1,36 +1,35 @@
 # Problem C - Many Requirements
 
 # input
-N, M, Q = map(int, input().split())
-rules = []
-for i in range(Q):
+n, m, q = map(int, input().split())
+pattern_list = []
+for i in range(q):
     a, b, c, d = map(int, input().split())
-    rules.append([a, b, c, d])
+    pattern_list.append([a, b, c, d])
 
 # initialization
-ans_score = 0
-num_list = []
+a_list = [0] * n
+ans_point = 0
 
-# calc func
-def dfs(num_list, keta, c):
-    global ans_score
-    global N
-    if keta==N:
-        # check
-        tmp = 0
-        for r in rules:
-            if num_list[r[1]-1]-num_list[r[0]-1]==r[2]:
-                tmp += r[3]
-        ans_score = max(ans_score, tmp)
-        return
+def dfs(a_c, n_c):
+    global a_list
+    global n
+    global m
+    global ans_point
 
-    for n in range(c, M+1):
-        num_list.append(n)
-        dfs(num_list, keta+1, n)
-        num_list.pop(-1)
+    if n_c-1==n:
+        tmp_point = 0
+        for p in pattern_list:
+            if a_list[p[1]-1]-a_list[p[0]-1]==p[2]:
+                tmp_point += p[3]
+        ans_point = max(ans_point, tmp_point)
+    else:
+        for i in range(a_c, m+1):
+            a_list[n_c-1] = i
+            dfs(i, n_c+1)
 
 # calc
-dfs(num_list, 0, 1)
+dfs(1, 1)
 
 # output
-print(ans_score)
+print(ans_point)
